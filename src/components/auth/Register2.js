@@ -77,7 +77,7 @@ const Register2 = ({ isAuthenticated, onChange, onSubmit, formData }) => {
               value="login"
               onClick={onSubmit}
             >
-              Register2
+              Register
             </Button>
             <br />
             <br />

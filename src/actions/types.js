@@ -1,8 +1,10 @@
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_SUCCESS2 = "REGISTER_SUCCESS2";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const USER_LOADED = "USER_LOADED";
+export const USER_LOADED2 = "USER_LOADED2";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -32,3 +34,5 @@ export const ADDMESSAGE="ADDMESSAGE";
 export const CONV_STATE="CONV_STATE";
 export const STATE_CONVERSATION="STATE_CONVERSATION";
 export const GET_ONE_CONVERSATION="GET_ONE_CONVERSATION";
+export const GET_KEYS="GET_KEYS";
+export const GET_PRIVATE="GET_PRIVATE";

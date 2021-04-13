@@ -1,4 +1,5 @@
 import {
+  REGISTER_SUCCESS2,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
@@ -15,6 +16,9 @@ import {
   CONV_STATE,
   STATE_CONVERSATION,
   GET_ONE_CONVERSATION,
+  GET_KEYS,
+  GET_PRIVATE,
+  USER_LOADED2,
 } from "../actions/types";
 
 const initialState = {
@@ -22,12 +26,15 @@ const initialState = {
   isAuthenticated: null,
   loading: true,
   user: null,
+  fin: null,
   category: null,
   conversation: [],
   currentconversation: {},
   currentevents: [],
   dict:{},
   singleConversation: [],
+  public_key:null,
+  private_key:null,
 };
 
 function authReducer(state = initialState, action) {
@@ -40,6 +47,14 @@ function authReducer(state = initialState, action) {
         isAuthenticated: true,
         loading: false,
         user: payload,
+      };
+    }
+    case USER_LOADED2: {
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        fin: payload,
       };
     }
     case ADDMESSAGE: {
@@ -57,6 +72,20 @@ function authReducer(state = initialState, action) {
         loading: false,
         currentevents: [...state.currentevents,payload]
       };
+    }
+    case GET_KEYS:{
+      return {
+        ...state,
+        public_key:payload[2],
+
+      }
+    }
+    case GET_PRIVATE:{
+      return {
+        ...state,
+        private_key:payload[1],
+
+      }
     }
     case GET_EVENTS: {
       console.log("this is current events  convo");
@@ -119,6 +148,7 @@ function authReducer(state = initialState, action) {
       };
 
     case REGISTER_SUCCESS:
+    case REGISTER_SUCCESS2:
     case LOGIN_SUCCESS:
       localStorage.setItem("token", payload.token);
       return {

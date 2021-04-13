@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import logo from "../../assets/ekyc.png";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -36,9 +37,11 @@ const Register = ({ isAuthenticated, onChange, onSubmit, formData }) => {
         <br />
 
         <div className="border1">
+        {/* <img src={logo} height="150" width="500000"></img> */}
           <br />
           <br />
           <br />
+          
           <h1 className="large text-dark">Sign Up</h1>
           <p className="black">
             <i className="fas fa-user"></i> Create Your Account

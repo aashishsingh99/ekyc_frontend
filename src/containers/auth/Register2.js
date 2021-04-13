@@ -21,12 +21,14 @@ const Register2 = ({ setAlert, register2, isAuthenticated }) => {
     });
   const onSubmit = (e) => {
     console.log("hi");
-    e.preventDefault();
+   e.preventDefault();
     // if (password !== password2) setAlert("Passwords dont match", "danger");
   register2({ name,password });
+  console.log("outside aKS");
   };
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
+    console.log("authenticatred truwe")
+    return <Redirect to="/dashboard2" />;
   }
 
   return (
