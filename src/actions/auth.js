@@ -9,6 +9,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  GET_ALL_USERS,
   //CLEAR_PROFILE,
 } from "./types";
 import { setAlert } from "./alert.js";
@@ -106,14 +107,63 @@ export const register2 = ({ name, password }) => async (dispatch) => {
   console.log("action");
   const body = JSON.stringify({ name, password });
   try {
-    const res = await axios.post("/api/users/inst", body, config);
+     const res = await axios.post("/api/users/inst", body, config);
+     console.log("after user register 2 api",res);
+    
+    //const res1=await axios.post("/api/users/all_users",body,config);
+    //const res1=await axios.post("/api/users/all_users",body,config);
     console.log("inside register 222222222",res.data);
+    //console.log("printing res1",res1.data);
+    
+    console.log("inside actoion register 2")
+    console.log(res.data);
     //localStorage.setItem("token", res.data.token);
     dispatch({
       type: REGISTER_SUCCESS2,
       payload: res.data,
     });
+    
     dispatch(loadUser2());
+    
+  } catch (err) {
+    // const errors = err.response.data.errors;
+    // if (errors) {
+    //   errors.forEach((errpr) => dispatch(setAlert(errors.msg, "danger")));
+    // }
+
+    dispatch({
+      type: REGISTER_FAIL,
+    });
+  }
+};
+export const all_users = () => async (dispatch) => {
+
+  console.log("ENTRYYYYYYYYYYYYY of all_users!")
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  console.log("action");
+  
+  try {
+    
+    
+    //const res1=await axios.post("/api/users/all_users",body,config);
+    const res1=await axios.post("/api/users/all_users",config);
+    console.log("inside register 222222222",res1.data);
+    
+
+    console.log("inside actoion all_users")
+    //console.log(res.data);
+    //localStorage.setItem("token", res.data.token);
+   
+    dispatch({
+      type: GET_ALL_USERS,
+      payload: res1.data,
+    });
+   
+    
   } catch (err) {
     // const errors = err.response.data.errors;
     // if (errors) {
@@ -148,6 +198,7 @@ export const login = (formData) => async (dispatch) => {
     });
     
     dispatch(loadUser());
+ 
     
   } catch (err) {
     //console.log("ye hai error")

@@ -12,6 +12,7 @@ const dashboard2 = () => {
   //   }, []);
   //console.log(category);
   return <Dashboard2  />;
+  
 };
 dashboard2.propTypes = {
   //category: PropTypes.string,

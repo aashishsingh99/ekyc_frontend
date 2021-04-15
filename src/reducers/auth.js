@@ -11,6 +11,7 @@ import {
   GET_CONV,
   ADD_CONV,
   CURRENT_CONV,
+  GET_ALL_USERS,
   GET_EVENTS,
   ADDMESSAGE,
   CONV_STATE,
@@ -35,6 +36,7 @@ const initialState = {
   singleConversation: [],
   public_key:null,
   private_key:null,
+  users:[],
 };
 
 function authReducer(state = initialState, action) {
@@ -77,6 +79,13 @@ function authReducer(state = initialState, action) {
       return {
         ...state,
         public_key:payload[2],
+
+      }
+    }
+    case GET_ALL_USERS:{
+      return {
+        ...state,
+        users: payload
 
       }
     }

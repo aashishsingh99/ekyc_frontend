@@ -34,52 +34,158 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import DirectionsBusIcon from '@material-ui/icons/DirectionsBus';
 import AccessAlarmsIcon from '@material-ui/icons/AccessAlarms';
+import {all_users} from "../../actions/auth";
+
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardMedia from "@material-ui/core/CardMedia";
 
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 700,
+    maxWidth: 180,
     marginTop: 20,
-    maxHeight: 600,
   },
-  a: {
-    height: 50,
-    fontSize: 30,
-    width: 250,
-    backgroundColor: "black",
-    color: "white",
+  media: {
+    marginTop: 50,
+    height: 140,
   },
- 
-  b: {
-    height: 30,
-    fontSize: 20,
-    width: 250,
+  ab: {
+    width: 150,
     backgroundColor: "black",
     color: "white",
   },
 });
-const useStylesForm = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '10ch',
-    },
-  },
-}));
+
 
 
 
   
   
-const Dashboard2 = () => {
+const Dashboard2 = ({all_users,users}) => {
+
+  useEffect(() => {
+    // check for token in LS
+
+    all_users();
+  }, []);
+  const classes = useStyles();
+
+  
+
+  
 return (
-  <div>
+  <Fragment>
+  {users && !users.length ? (
+    <h1>No Contacts Found</h1>
+  ) :
+  
+   (
+     users && users.length && users.map((user)=>(
+      <Fragment>{
+        <Card className={classes.root}>
+                <CardActionArea>
+                  {/* <CardMedia className={classes.media} image={img} title={bus.bus_id} /> */}
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {user.Key} 
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                    Email:{user.Record.make} <br/>
+                    DOB:{user.Record.color}
+                      <br />
+                    
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+        
+                <CardActions>
+                   <Link to={`/api/users/bus/${"bus._id"}`}>
+                     {" "}
+                   <Button
+                      className={classes.ab}
+                      type="submit"
+                      variant="contained"
+                      value="login"
+                    >
+                      {" "}
+                     Approve{" "}
+                    </Button>
+                  </Link>{" "}
+                </CardActions>
+              </Card>}</Fragment>
+     ))
+    
 
-    <h1>hello dashboard12</h1>
-  </div>
-)
+   )
+   }
+  
+  </Fragment>
+);}
 
-};
+
+  // <Fragment>
+  //     {
+  //       <div className="bus_items">
+        
+  //         {users && users.length > 0 ? (
+          
+  //         users.map((user) => (
+  //           <Fragment> 
+
+          
+  //           <Card className={classes.root}>
+  //           <CardActionArea>
+  //             {/* <CardMedia className={classes.media} image={img} title={bus.bus_id} /> */}
+  //             <CardContent>
+  //               <Typography gutterBottom variant="h5" component="h2">
+  //                 {"Sakshi"} to {"bus.to"}
+  //               </Typography>
+  //               <Typography variant="body2" color="textSecondary" component="p">
+  //                 Start At: {"bus.start_time"}
+  //                 <br />
+  //                 End At:{"bus.end_time"}
+  //               </Typography>
+  //             </CardContent>
+  //           </CardActionArea>
+    
+  //           <CardActions>
+  //             <Link to={`/api/users/bus/${"bus._id"}`}>
+  //               {" "}
+  //               <Button
+  //                 className={classes.ab}
+  //                 type="submit"
+  //                 variant="contained"
+  //                 value="login"
+  //               >
+  //                 {" "}
+  //                 View Bus{" "}
+  //               </Button>
+  //             </Link>{" "}
+  //           </CardActions>
+  //         </Card>
+  //         </Fragment>
+            
+  //         ))
+  //       )
+  //        :
+  //        (
+  //         <h4>No users found</h4>
+  //       )
+  //        }
+         
+        
+      
+    
+
+      
+  //     </div>
+  //     }
+  //   </Fragment>
+  //   //<div>Hi</div>
+//   );
+
+
+// };
 
 Dashboard2.propTypes = {
 
@@ -87,7 +193,8 @@ Dashboard2.propTypes = {
 
 const mapStateToProps = (state) => ({
  // category: state.auth.category,
+ users:state.auth.users,
  
 });
 
-export default connect(mapStateToProps, {})(Dashboard2);
+export default connect(mapStateToProps, {all_users})(Dashboard2);
