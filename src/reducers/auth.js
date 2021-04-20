@@ -5,6 +5,7 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
+  LOGIN2_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
   CONV_ERROR,
@@ -20,6 +21,8 @@ import {
   GET_KEYS,
   GET_PRIVATE,
   USER_LOADED2,
+  APPROVE,
+  NOTIFY,
 } from "../actions/types";
 
 const initialState = {
@@ -27,6 +30,7 @@ const initialState = {
   isAuthenticated: null,
   loading: true,
   user: null,
+  current_user:null,
   fin: null,
   category: null,
   conversation: [],
@@ -37,6 +41,7 @@ const initialState = {
   public_key:null,
   private_key:null,
   users:[],
+
 };
 
 function authReducer(state = initialState, action) {
@@ -50,6 +55,21 @@ function authReducer(state = initialState, action) {
         loading: false,
         user: payload,
       };
+    }
+    case NOTIFY: {
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        current_user: payload,
+      };
+    }
+    case APPROVE:{
+      return {
+        ...state,
+         users:payload,
+        // users:[...state.users,users[]],
+      }
     }
     case USER_LOADED2: {
       return {
@@ -167,6 +187,15 @@ function authReducer(state = initialState, action) {
         loading: false,
         user: payload,
       };
+      case LOGIN2_SUCCESS:
+        localStorage.setItem("token", payload.token);
+        return {
+          ...state,
+          ...payload,
+          isAuthenticated: true,
+          loading: false,
+          fin: payload,
+        };
     case REGISTER_FAIL:
     case AUTH_ERROR:
     case LOGIN_FAIL:

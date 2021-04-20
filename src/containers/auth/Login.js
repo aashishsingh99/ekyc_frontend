@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { login } from "../../actions/auth";
+import { login,login2 } from "../../actions/auth";
 import Present_login from "../../components/auth/Login";
 const io = require("socket.io-client");
 // const socket = io();
@@ -23,13 +23,25 @@ const Login = ({ login, isAuthenticated }) => {
     });
   const onSubmit = async (e) => {
     e.preventDefault();
-    login({ email: email, password: password,user_type:user_type });
+    if(user_type=="client")
+    {
+      login({ email: email, password: password,user_type:user_type });
+      console.log("redirecting");
+      //return <Redirect to="/dashboard" />;
+   
+    }
+    else
+    {
+      login2({ email: email, password: password,user_type:user_type });
+      return <Redirect to="/dashboard2" />;
+    }
+   
     console.log("Success");
   };
   //redirect if logged in
 
   if (isAuthenticated) {
-    return <Redirect to="/chat" />;
+    return <Redirect to="/dashboard" />;
   }
 
   return (

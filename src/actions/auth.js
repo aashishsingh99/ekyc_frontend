@@ -10,10 +10,14 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   GET_ALL_USERS,
+  APPROVE,
+  LOGIN2_SUCCESS,
   //CLEAR_PROFILE,
 } from "./types";
 import { setAlert } from "./alert.js";
 import setAuthToken from "../utils/setAuthToken";
+import { Notify} from "../actions/Notify";
+
 export const loadUser = () => async (dispatch) => {
   console.log(localStorage.token);
 
@@ -28,11 +32,13 @@ export const loadUser = () => async (dispatch) => {
     const res = await axios.get("/api/auth");
     console.log("in user loaded");
     if (res) console.log(res);
+    
 
     dispatch({
       type: USER_LOADED,
       payload: res.data,
     });
+    
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
@@ -60,23 +66,22 @@ export const Approve = (user) => async (dispatch) => {
 
     // console.log("in");
     const res = await axios.post("/api/auth/approve", body, config);
-
+    console.log("line 644444444444",res)
     // console.log("in user loaded");
-    if (res) console.log(res);
+    if (res) console.log(res.data,"JKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
+    // dispatch({
+    //   type: USER_LOADED,
+    //   payload: res.data,
+    // });
+    // const res1 = await axios.post("/api/users/all_users", config);
+    // console.log("refreshing users", res1.data);
+
+    // //console.log(res.data);
+    // //localStorage.setItem("token", res.data.token);
 
     dispatch({
-      type: USER_LOADED,
+      type: APPROVE,
       payload: res.data,
-    });
-    const res1 = await axios.post("/api/users/all_users", config);
-    console.log("refreshing users", res1.data);
-
-    //console.log(res.data);
-    //localStorage.setItem("token", res.data.token);
-
-    dispatch({
-      type: GET_ALL_USERS,
-      payload: res1.data,
     });
   } catch (err) {
     dispatch({
@@ -192,7 +197,7 @@ export const all_users = () => async (dispatch) => {
   try {
     //const res1=await axios.post("/api/users/all_users",body,config);
     const res1 = await axios.post("/api/users/all_users", config);
-    console.log("inside register 222222222", res1.data);
+    console.log("OMGGGGGGGG",res1.data);
 
     console.log("inside actoion all_users");
     //console.log(res.data);
@@ -231,6 +236,42 @@ export const login = (formData) => async (dispatch) => {
 
     await dispatch({
       type: LOGIN_SUCCESS,
+      payload: res.data,
+    });
+
+    dispatch(loadUser());
+  } catch (err) {
+    //console.log("ye hai error")
+    //console.log(err)
+    // const errors = err.response.data.errors;
+    // if (errors) {
+    //   errors.forEach((errpr) => dispatch(setAlert(errors.msg, "danger")));
+    // }
+    //localStorage.removeItem("token");
+
+    dispatch({
+      type: LOGIN_FAIL,
+    });
+  }
+};
+
+export const login2 = (formData) => async (dispatch) => {
+  //console.log(email);
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const res = await axios.post("/api/auth/filogin", formData, config);
+
+    //localStorage.setItem("token", res.data.token);
+    console.log("before login success dis finnnn");
+
+    await dispatch({
+      type: LOGIN2_SUCCESS,
       payload: res.data,
     });
 

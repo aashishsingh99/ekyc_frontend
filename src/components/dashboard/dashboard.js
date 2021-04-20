@@ -7,14 +7,15 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import PersonIcon from "@material-ui/icons/Person";
 import { connect } from "react-redux";
-
+import green from "@material-ui/core/colors/green";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import { Redirect } from "react-router-dom";
-
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import Typography from "@material-ui/core/Typography";
-import { Get_keys } from "../../actions/Get_keys";
+import { Get_keys} from "../../actions/Get_keys";
+import { Notify} from "../../actions/Notify";
 import axios from 'axios'
 import {useSelector,useDispatch} from 'react-redux'
 import Table from '@material-ui/core/Table';
@@ -71,7 +72,13 @@ const useStylesForm = makeStyles((theme) => ({
 
   
   
-const Dashboard = ({ category,name,Get_keys,public_key,private_key }) => {
+const Dashboard = ({ category,name,user,Get_keys,auth,public_key,private_key,Notify ,current_user}) => {
+  // useEffect(() => {
+  //   // check for token in LS
+  //   console.log("calling notify",auth)
+  // Notify({user});
+
+  // }, []);
   const classes = useStyles();
   const  [status, setstatus] = useState(false)
   const [open, setOpen] = useState(false);
@@ -128,9 +135,16 @@ const submit = (e) => {
     handleClose()
     // .catch(e => alert(e.message))
 }
+const onSubmit3 = ({e,user}) => {
+  // e.preventDefault();
+   console.log("calling notify action",user);
+ Notify({user});
+ setOpen2(true);
+ };
     return (
       <div>
       <Fragment>
+        {}
         {" "}
         <Fragment>
           <br />
@@ -150,10 +164,24 @@ const submit = (e) => {
                   color="textSecondary"
                   gutterBottom
                 >
+                  {/* {console.log("calling notify",auth.user)}
+              {Notify({user})} */}
                   <h2 className={classes.b}  className="medium">
                     <PersonIcon fontSize="large" /> Your request is generated..You will soon be contacted by one of our financial institutions.
                   </h2>
+                  
                   <br />
+                  <Button
+                          className={classes.ab}
+                          type="submit"
+                          variant="contained"
+                          value="login"
+                          //disabled={user.Record.owner === "Verified"}
+                          onClick={(e) => onSubmit3({e,user})}
+                        >
+                          {" "}
+                        View Status{" "}
+                        </Button>
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
                   {/* <Link to="/addbus"> */}
@@ -181,10 +209,14 @@ const submit = (e) => {
       </Fragment>
 
 <Dialog open={open2} onClose={handleClose2} aria-labelledby="form-dialog-title">
-<DialogTitle id="form-dialog-title"> <bold>Private Key:</bold></DialogTitle>
+<DialogTitle id="form-dialog-title"> </DialogTitle>
+
+{console.log("yyyyyyyyyyyyyyyyyyyy",current_user && current_user.substring(current_user.length-10,current_user.length))}
 <DialogContent>
   <DialogContentText>
-    {private_key}
+    {current_user  && current_user.substring(current_user.length-10,current_user.length-2)==="Verified"? <h1>You have been verified <CheckCircleIcon
+                                  style={{ color: "green" }}
+                                ></CheckCircleIcon> </h1>:<h1>You are still being processed</h1>}
   </DialogContentText>
   
   {/* <h1>inside dialogbox</h1> */}
@@ -226,8 +258,9 @@ const submit = (e) => {
 
 Dashboard.propTypes = {
   category: PropTypes.string,
-  auth:PropTypes.string,
+  auth:PropTypes.object,
   public_key:PropTypes.string,
+  user:PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
@@ -235,6 +268,9 @@ const mapStateToProps = (state) => ({
   name:state.auth.user.name,
   public_key:state.auth.public_key,
   private_key:state.auth.private_key,
+  user:state.auth.user,
+  auth:state.auth,
+  current_user:state.auth.current_user,
 });
 
-export default connect(mapStateToProps, {Get_keys})(Dashboard);
+export default connect(mapStateToProps, {Get_keys,Notify})(Dashboard);

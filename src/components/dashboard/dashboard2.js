@@ -63,15 +63,19 @@ const Dashboard2 = ({ all_users, users, Approve }) => {
     // check for token in LS
 
     all_users();
+    
   }, []);
   const classes = useStyles();
 
-  const onSubmit = (user) => {
+  const onSubmit = ({e,user}) => {
+   // e.preventDefault();
     console.log("inside on submit");
     console.log(user);
     console.log("calling approve");
-    //e.preventDefault();
+    
     Approve(user);
+    all_users();
+   
     console.log("outside approve");
   };
   return (
@@ -123,7 +127,7 @@ const Dashboard2 = ({ all_users, users, Approve }) => {
                           variant="contained"
                           value="login"
                           disabled={user.Record.owner === "Verified"}
-                          onClick={(e) => onSubmit(user)}
+                          onClick={(e) => onSubmit({e,user})}
                         >
                           {" "}
                           Approve{" "}
@@ -207,6 +211,7 @@ Dashboard2.propTypes = {};
 const mapStateToProps = (state) => ({
   // category: state.auth.category,
   users: state.auth.users,
+  
 });
 
 export default connect(mapStateToProps, { all_users, Approve })(Dashboard2);

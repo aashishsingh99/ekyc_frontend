@@ -20,6 +20,9 @@ const App = () => {
 
     store.dispatch(loadUser());
     store.dispatch(loadUser2());
+    // console.log("calling notify",auth)
+    
+    // Notify({user});
   }, []);
   // log user out from all tabs if they log out in one tab
 
