@@ -16,18 +16,18 @@ import { setAlert } from "./alert.js";
 import setAuthToken from "../utils/setAuthToken";
 export const loadUser = () => async (dispatch) => {
   console.log(localStorage.token);
-  
+
   try {
-     console.log("token hai ye2!");
-   console.log(localStorage.token);
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
-  
+    console.log("token hai ye2!");
+    console.log(localStorage.token);
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+
     console.log("in");
     const res = await axios.get("/api/auth");
     console.log("in user loaded");
-     if (res) console.log(res);
+    if (res) console.log(res);
 
     dispatch({
       type: USER_LOADED,
@@ -40,20 +40,65 @@ export const loadUser = () => async (dispatch) => {
   }
 };
 
+export const Approve = (user) => async (dispatch) => {
+  console.log(user);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  //const timestamp=null;
+
+  const body = JSON.stringify(user);
+
+  try {
+    //console.log("token hai ye2!");
+    //console.log(localStorage.token);
+    // if (localStorage.token) {
+    //   setAuthToken(localStorage.token);
+    // }
+
+    // console.log("in");
+    const res = await axios.post("/api/auth/approve", body, config);
+
+    // console.log("in user loaded");
+    if (res) console.log(res);
+
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data,
+    });
+    const res1 = await axios.post("/api/users/all_users", config);
+    console.log("refreshing users", res1.data);
+
+    //console.log(res.data);
+    //localStorage.setItem("token", res.data.token);
+
+    dispatch({
+      type: GET_ALL_USERS,
+      payload: res1.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR,
+    });
+  }
+};
+
 export const loadUser2 = () => async (dispatch) => {
   console.log(localStorage.token);
-  
+
   try {
-     console.log("token hai ye2!");
-   console.log(localStorage.token);
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
-  
+    console.log("token hai ye2!");
+    console.log(localStorage.token);
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+
     console.log("in");
     const res = await axios.get("/api/auth/fin");
     console.log("in user loaded");
-     if (res) console.log(res);
+    if (res) console.log(res);
 
     dispatch({
       type: USER_LOADED2,
@@ -66,16 +111,17 @@ export const loadUser2 = () => async (dispatch) => {
   }
 };
 
-
 // Register User
-export const register = ({ name, email, password,dob,id }) => async (dispatch) => {
+export const register = ({ name, email, password, dob, id }) => async (
+  dispatch
+) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
   console.log("action");
-  const body = JSON.stringify({ name, email, password,dob,id});
+  const body = JSON.stringify({ name, email, password, dob, id });
   try {
     const res = await axios.post("/api/users", body, config);
     //localStorage.setItem("token", res.data.token);
@@ -97,8 +143,7 @@ export const register = ({ name, email, password,dob,id }) => async (dispatch) =
 };
 //login
 export const register2 = ({ name, password }) => async (dispatch) => {
-
-  console.log("ENTRYYYYYYYYYYYYY!")
+  console.log("ENTRYYYYYYYYYYYYY!");
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -107,24 +152,23 @@ export const register2 = ({ name, password }) => async (dispatch) => {
   console.log("action");
   const body = JSON.stringify({ name, password });
   try {
-     const res = await axios.post("/api/users/inst", body, config);
-     console.log("after user register 2 api",res);
-    
+    const res = await axios.post("/api/users/inst", body, config);
+    console.log("after user register 2 api", res);
+
     //const res1=await axios.post("/api/users/all_users",body,config);
     //const res1=await axios.post("/api/users/all_users",body,config);
-    console.log("inside register 222222222",res.data);
+    console.log("inside register 222222222", res.data);
     //console.log("printing res1",res1.data);
-    
-    console.log("inside actoion register 2")
+
+    console.log("inside actoion register 2");
     console.log(res.data);
     //localStorage.setItem("token", res.data.token);
     dispatch({
       type: REGISTER_SUCCESS2,
       payload: res.data,
     });
-    
+
     dispatch(loadUser2());
-    
   } catch (err) {
     // const errors = err.response.data.errors;
     // if (errors) {
@@ -137,33 +181,27 @@ export const register2 = ({ name, password }) => async (dispatch) => {
   }
 };
 export const all_users = () => async (dispatch) => {
-
-  console.log("ENTRYYYYYYYYYYYYY of all_users!")
+  console.log("ENTRYYYYYYYYYYYYY of all_users!");
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
   console.log("action");
-  
-  try {
-    
-    
-    //const res1=await axios.post("/api/users/all_users",body,config);
-    const res1=await axios.post("/api/users/all_users",config);
-    console.log("inside register 222222222",res1.data);
-    
 
-    console.log("inside actoion all_users")
+  try {
+    //const res1=await axios.post("/api/users/all_users",body,config);
+    const res1 = await axios.post("/api/users/all_users", config);
+    console.log("inside register 222222222", res1.data);
+
+    console.log("inside actoion all_users");
     //console.log(res.data);
     //localStorage.setItem("token", res.data.token);
-   
+
     dispatch({
       type: GET_ALL_USERS,
       payload: res1.data,
     });
-   
-    
   } catch (err) {
     // const errors = err.response.data.errors;
     // if (errors) {
@@ -178,28 +216,25 @@ export const all_users = () => async (dispatch) => {
 
 export const login = (formData) => async (dispatch) => {
   //console.log(email);
-  
+
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
-  
+
   try {
-    
     const res = await axios.post("/api/auth", formData, config);
-    
+
     //localStorage.setItem("token", res.data.token);
-    console.log("before login success dis")
-    
+    console.log("before login success dis");
+
     await dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
-    
+
     dispatch(loadUser());
- 
-    
   } catch (err) {
     //console.log("ye hai error")
     //console.log(err)
@@ -219,5 +254,3 @@ export const logout = () => (dispatch) => {
   console.log("logout");
   dispatch({ type: LOGOUT });
 };
-
-
