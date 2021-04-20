@@ -38,6 +38,7 @@ import {all_users} from "../../actions/auth";
 
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
+import { Grid } from "@material-ui/core";
 
 
 const useStyles = makeStyles({
@@ -74,20 +75,19 @@ const Dashboard2 = ({all_users,users}) => {
 
   
 return (
-  <Fragment>
-  {users && !users.length ? (
-    <h1>No Contacts Found</h1>
-  ) :
-  
-   (
-     users && users.length && users.map((user)=>(
-      <Fragment>{
-        <Card className={classes.root}>
-                <CardActionArea>
-                  {/* <CardMedia className={classes.media} image={img} title={bus.bus_id} /> */}
-                  <CardContent>
+  <Fragment >
+    <Fragment>
+      
+      <div className="bus_items">
+        {users.length > 0 ? (
+          users.map((user) => (
+            
+            <Card className={classes.root}>
+                <CardActionArea> 
+                   {/* <CardMedia className={classes.media} image={img} title={bus.bus_id} /> */} 
+                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                      {user.Key} 
+                      {user.Key.substring(3)} 
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                     Email:{user.Record.make} <br/>
@@ -112,12 +112,13 @@ return (
                     </Button>
                   </Link>{" "}
                 </CardActions>
-              </Card>}</Fragment>
-     ))
-    
-
-   )
-   }
+              </Card>
+          ))
+        ) : (
+          <h4>No buses found</h4>
+        )}
+      </div>
+    </Fragment>
   
   </Fragment>
 );}

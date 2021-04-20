@@ -150,20 +150,20 @@ const submit = (e) => {
                   color="textSecondary"
                   gutterBottom
                 >
-                  <h2 className={classes.b}  className="large">
-                    <PersonIcon fontSize="large" /> You are added to the network!
+                  <h2 className={classes.b}  className="medium">
+                    <PersonIcon fontSize="large" /> Your request is generated..You will soon be contacted by one of our financial institutions.
                   </h2>
                   <br />
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
                   {/* <Link to="/addbus"> */}
-                    <Button className={classes.a}  onClick={onSubmit}>Public Key</Button>
+                    {/* <Button className={classes.a}  onClick={onSubmit}>Public Key</Button> */}
                   {/* </Link> */}
-                  <br /> <br />
-                </Typography>
-                <Typography className={classes.pos} color="textSecondary">
+                  {/* <br /> <br /> */}
+                {/* </Typography> */}
+                {/* <Typography className={classes.pos} color="textSecondary"> */}
                   {/* <Link to="/getallbuses"> */}
-                    <Button className={classes.a} onClick= {handleClickOpen2} >Private Key</Button>
+                    {/* <Button className={classes.a} onClick= {handleClickOpen2} >Private Key</Button> */}
                   {/* </Link> */}
                   <br />
                   <br />

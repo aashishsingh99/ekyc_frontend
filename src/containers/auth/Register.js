@@ -15,7 +15,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     id:""
   
   });
-  const { name, email, password,dob,id } = formData;
+  let { name, email, password,dob,id } = formData;
   const onChange = (e) =>
     setFormData({
       ...formData,
@@ -25,6 +25,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     console.log("hi");
     console.log("inside on submit")
     e.preventDefault();
+    name="CAR"+name
+    console.log("updated name is ",name);
     // if (password !== password2) setAlert("Passwords dont match", "danger");
   register({ name, email, password,dob,id});
   console.log("after register")

@@ -5,7 +5,7 @@
   --danger-color: #dc3545;
   --success-color: #28a745;
   background-color: lightblue;
-  background: url("./img/bu.png") no-repeat center center/cover;
+  background: url('./img/bu.png') no-repeat center center/cover;
   background-size: cover;
   height: 200%;
 }
@@ -19,7 +19,7 @@ body {
   height: 200%;
   width: 100%;
   background-color: lightblue;
-  background: url("./img/bu.png") no-repeat center center/cover;
+  background: url('./img/bu.png') no-repeat center center/cover;
   background-size: cover;
 }
 .stripe {
@@ -27,7 +27,7 @@ body {
   height: 30%;
 
   background-color: lightblue;
-  background: url("./img/bu.png") no-repeat center center/cover;
+  background: url('./img/bu.png') no-repeat center center/cover;
   background-size: cover;
   /* opacity: 0.5; */
 }
@@ -43,7 +43,7 @@ body {
   width: 100%;
 }
 body {
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 1rem;
   line-height: 1.2;
 }
@@ -85,7 +85,7 @@ img {
   width: 720px;
   padding: 10px;
 
-  background: url("./img/cream.jpg") no-repeat center center/cover;
+  background: url('./img/cream.jpg') no-repeat center center/cover;
   background-size: cover;
 
   margin: 0;
@@ -400,10 +400,10 @@ img {
   color: #888;
 }
 
-.form input[type="text"],
-.form input[type="email"],
-.form input[type="password"],
-.form input[type="date"],
+.form input[type='text'],
+.form input[type='email'],
+.form input[type='password'],
+.form input[type='date'],
 .form select,
 .form textarea {
   display: block;
@@ -411,7 +411,7 @@ img {
   padding: 0.6rem;
   font-size: 1.5rem;
 }
-button .form input[type="submit"],
+button .form input[type='submit'],
 button {
   font: 2px;
 
@@ -547,7 +547,7 @@ Link {
 }
 .bus_items {
   display: grid;
-  grid-template-columns: 2fr 2fr 2fr;
+  grid-template-columns: 3fr 3fr 3fr 3fr 3fr;
   align-items: center;
   border: 10px;
   /* width: 50%; */
@@ -561,10 +561,10 @@ Link {
 .profile-grid {
   display: grid;
   grid-template-areas:
-    "top top"
-    "about about"
-    "exp edu"
-    "github github";
+    'top top'
+    'about about'
+    'exp edu'
+    'github github';
   grid-gap: 1rem;
 }
 
@@ -750,11 +750,11 @@ Link {
 
   .profile-grid {
     grid-template-areas:
-      "top"
-      "about"
-      "exp"
-      "edu"
-      "github";
+      'top'
+      'about'
+      'exp'
+      'edu'
+      'github';
   }
 
   .profile-about .skills {
