@@ -85,12 +85,6 @@ const Dashboard = ({
   Notify,
   current_user,
 }) => {
-  // useEffect(() => {
-  //   // check for token in LS
-  //   console.log("calling notify",auth)
-  // Notify({user});
-
-  // }, []);
   const classes = useStyles();
   const [status, setstatus] = useState(false);
   const [open, setOpen] = useState(false);
@@ -100,29 +94,21 @@ const Dashboard = ({
   const onSubmit = (e) => {
     setOpen(true);
     console.log("going to call action");
-    // console.log("name is",name)
+
     const dam = name;
     Get_keys(dam);
-    // console.log("filename")
-    // console.log(res);
+
     console.log("done action call");
   };
   const onSubmit2 = (e) => {
     setOpen2(true);
     console.log("going to call action");
-    // console.log("name is",name)
+
     const dam = name;
     Get_keys(dam);
-    // console.log("filename")
-    // console.log(res);
+
     console.log("done action call");
   };
-  //   const onSubmit = async (e) => {
-  //     //e.preventDefault();
-  //     console.log("going to call action");
-  //     Get_keys({ name:name});
-  //  console.log("done action call");
-  //   };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -140,12 +126,9 @@ const Dashboard = ({
   const submit = (e) => {
     e.preventDefault();
 
-    // .then(d => setstatus(true))
     handleClose();
-    // .catch(e => alert(e.message))
   };
   const onSubmit3 = ({ e, user }) => {
-    // e.preventDefault();
     console.log("calling notify action", user);
     Notify({ user });
     setOpen2(true);
@@ -172,8 +155,6 @@ const Dashboard = ({
                   color="textSecondary"
                   gutterBottom
                 >
-                  {/* {console.log("calling notify",auth.user)}
-              {Notify({user})} */}
                   <div
                     fontSize="large"
                     className={classes.b}
@@ -267,9 +248,6 @@ const Dashboard = ({
           <Button className={classes.b} onClick={handleClose}>
             <center>Cancel</center>
           </Button>
-          {/* <Button variant="contained" color="grey" onClick={submit} >
-    Add Bus
-  </Button> */}
         </DialogActions>
       </Dialog>
     </div>

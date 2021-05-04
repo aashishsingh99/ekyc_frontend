@@ -126,19 +126,6 @@ const Login = ({ isAuthenticated, formData, onChange, onSubmit }) => {
             Sign In
           </Button>
         </form>
-        {/* <Grid container justify="flex-end">
-          Don't have an account?{"  "}&nbsp;
-          <Link to="/login">
-            <Button
-              type="submit"
-              variant="contained"
-              color="secondary"
-              value="login"
-            >
-              Sign Up
-            </Button>
-          </Link>
-        </Grid> */}
         <Grid container justify="flex-end">
           Don't have an account?{"  "}&nbsp;
           <Link to="/register">

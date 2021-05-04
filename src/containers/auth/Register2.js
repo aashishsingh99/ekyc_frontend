@@ -10,10 +10,8 @@ const Register2 = ({ setAlert, register2, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: "",
     password: "",
-    
-  
   });
-  const { name,password} = formData;
+  const { name, password } = formData;
   const onChange = (e) =>
     setFormData({
       ...formData,
@@ -21,13 +19,13 @@ const Register2 = ({ setAlert, register2, isAuthenticated }) => {
     });
   const onSubmit = (e) => {
     console.log("hi");
-   e.preventDefault();
-    // if (password !== password2) setAlert("Passwords dont match", "danger");
-  register2({ name,password });
-  console.log("outside aKS");
+    e.preventDefault();
+
+    register2({ name, password });
+    console.log("outside aKS");
   };
   if (isAuthenticated) {
-    console.log("authenticatred truwe")
+    console.log("authenticatred truwe");
     return <Redirect to="/dashboard2" />;
   }
 

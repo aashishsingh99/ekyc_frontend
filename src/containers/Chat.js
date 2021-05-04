@@ -7,14 +7,8 @@ import Chat1 from "../components/Chat";
 const Chat = ({ user_name }) => {
   console.log("inside chat container");
   console.log(user_name);
-//   const onSubmit = async (e) => {
-//     e.preventDefault();
 
-//     console.log("on click");
-//   };
-  //redirect if logged in
-
-  return <Chat1 user_name={user_name}  />;
+  return <Chat1 user_name={user_name} />;
 };
 Chat.propTypes = {
   user_name: PropTypes.string,

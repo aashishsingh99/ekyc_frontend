@@ -26,7 +26,6 @@ const Login = ({ login, isAuthenticated }) => {
     if (user_type == "client") {
       login({ email: email, password: password, user_type: user_type });
       console.log("redirecting");
-      //return <Redirect to="/dashboard" />;
     } else {
       login2({ email: email, password: password, user_type: user_type });
       return <Redirect to="/dashboard2" />;
@@ -34,7 +33,6 @@ const Login = ({ login, isAuthenticated }) => {
 
     console.log("Success");
   };
-  //redirect if logged in
 
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />;

@@ -9,17 +9,11 @@ import { logout } from "../../actions/auth";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 const NavBar = ({ getbuses, logout, auth: { isAuthenticated, loading } }) => {
-  
   const authLinks = (
     <ul>
-      <li>
-        {/* <Link to="/Buses">
-          <DirectionsBusIcon fontSize="large" />
-        </Link> */}
-      </li>
+      <li></li>
       <li>
         <a onClick={logout} href="/login">
-          {/* <i className="fas fa-sign-out-alt" /> */}
           {""}
           <span className="hide-sm">
             <ExitToAppIcon fontSize="large" />
@@ -28,7 +22,7 @@ const NavBar = ({ getbuses, logout, auth: { isAuthenticated, loading } }) => {
       </li>
     </ul>
   );
-  
+
   const guestLinks = (
     <ul>
       <ul>

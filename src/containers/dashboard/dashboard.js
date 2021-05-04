@@ -7,9 +7,6 @@ import { connect } from "react-redux";
 import Dashboard from "../../components/dashboard/dashboard";
 
 const dashboard = ({ category }) => {
-  //   useEffect(() => {
-  //     getCurrentProfile();
-  //   }, []);
   console.log(category);
   return <Dashboard category={category} />;
 };

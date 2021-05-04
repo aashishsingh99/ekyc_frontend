@@ -1,4 +1,4 @@
-import React, { useEffect,Fragment } from "react";
+import React, { useEffect, Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -11,8 +11,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 import Avatar from "@material-ui/core/Avatar";
 import Fab from "@material-ui/core/Fab";
 import SendIcon from "@material-ui/icons/Send";
@@ -28,12 +28,8 @@ import { Get_Events } from "../actions/Get_Events";
 import { postMessage } from "../actions/postMessage";
 import { State_conversation } from "../actions/State_conversation";
 import { new_conver_state } from "../actions/new_conver_state";
-import {Get_One_Conversation} from "../actions/Get_One_Conversation";
+import { Get_One_Conversation } from "../actions/Get_One_Conversation";
 import socket from "../socketConfig";
-
-
-
-
 
 const useStyles = makeStyles({
   root: {
@@ -81,23 +77,18 @@ const Chat = ({
     newConversation({ chatid: chatid });
     console.log("calling get function sakshiiiiii");
     console.log(Date.now);
-    const username=""
-    // const username =
-    //   conversation.recipients[0].name === auth.user.name
-    //     ? conversation.recipients[1].name
-    //     : conversation.recipients[0].name;
-    Get_Events({chatRoomId: chatid,username:username})
+    const username = "";
+
+    Get_Events({ chatRoomId: chatid, username: username });
     console.log("calling get_one_conversation");
     Get_One_Conversation({ chatRoomId: chatid });
   };
   useEffect(() => {
     console.log("i am useeffect");
-    //const name = auth.user.name;
+
     Get_Conv({ user_name: user_name });
   }, []);
   useEffect(() => {
-    
-
     if (auth.user.name !== undefined && conversation.length > 0) {
       const me = auth.user.name;
       console.log("AAAAAAAA", me);
@@ -117,21 +108,19 @@ const Chat = ({
     });
   }, []);
 
-  useEffect(()=>{
-    socket.on("new_message",({event})=>{
-      console.log("message new")
-      const text = event.text 
-      const chatRoomId=event.chatRoomId
-      const messageId=event.messageId
+  useEffect(() => {
+    socket.on("new_message", ({ event }) => {
+      console.log("message new");
+      const text = event.text;
+      const chatRoomId = event.chatRoomId;
+      const messageId = event.messageId;
       if (currentconversation && currentconversation._id === event.chatRoomId) {
-         State_conversation({event});
+        State_conversation({ event });
       } else {
         //send notification of new event
       }
-      
-      
-    })
-  },[currentconversation])
+    });
+  }, [currentconversation]);
 
   const [contacts, setContacts] = useState([]);
 
@@ -149,11 +138,7 @@ const Chat = ({
     Add_Conv({ user_name: temp2 });
 
     console.log("calling get");
-    //Get_Conv({ user_name: user_name });
-    //console.log("on click");
   };
-
-  //console.log("hello everybody");
 
   const classes = useStyles();
 
@@ -196,27 +181,36 @@ const Chat = ({
           </Grid>
           <Divider />
           <List>
-            
-            
-
             {!conversation.length ? (
               <h1>No Contacts Found</h1>
             ) : (
               conversation.map((x) => (
                 // console.log(x._id)
                 <Fragment>
-                <ListItem
-                  button
-                  onClick={(e) => fun({ chatid: x._id })}
-                  key={x.recipients[0].name===auth.user.name ?  x.recipients[1].name:x.recipients[0].name}
-                >
-                  <ListItemIcon>
-                    <PersonAddIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={x.recipients[0].name===auth.user.name ?  x.recipients[1].name:x.recipients[0].name}>
-                    {x.recipients[0].name===auth.user.name ?  x.recipients[1].name:x.recipients[0].name}
-                  </ListItemText>
-                </ListItem>
+                  <ListItem
+                    button
+                    onClick={(e) => fun({ chatid: x._id })}
+                    key={
+                      x.recipients[0].name === auth.user.name
+                        ? x.recipients[1].name
+                        : x.recipients[0].name
+                    }
+                  >
+                    <ListItemIcon>
+                      <PersonAddIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        x.recipients[0].name === auth.user.name
+                          ? x.recipients[1].name
+                          : x.recipients[0].name
+                      }
+                    >
+                      {x.recipients[0].name === auth.user.name
+                        ? x.recipients[1].name
+                        : x.recipients[0].name}
+                    </ListItemText>
+                  </ListItem>
                 </Fragment>
               ))
             )}
@@ -227,56 +221,58 @@ const Chat = ({
           <List className={classes.messageArea}>
             {currentevents.length &&
               currentevents.map((curr) => (
-              <Fragment> 
-                <Grid>
-                
-                
-                <ListItem>
-                  <Grid container>
-                    <Grid item xs={12}>
-                      {curr.sender !== auth.user._id && (
-                        <ListItemText
-                          align="left"
-                          
-                          
-                          primary={curr.text}
-                          
-                          secondary={curr.date.substr(11, 5)}
-                         
-                        ></ListItemText>
-                      )}
-                      {curr.sender === auth.user._id && (
-                        <Fragment>
-                          <Grid container>
-                            
-                        <Grid item xs={11}>
-                        <ListItemText
-                          align="right"
-                          primary={curr.text }
-                          secondary={curr.date.substr(11, 5)}
-                        ></ListItemText>
-                        </Grid>
-                        <Grid item xs={1}>
-                        <DeleteIcon 
-                        // onClick={(e) =>
-                        //   deleteMessage({
-                            
-                        //   })}
+                <Fragment>
+                  <Grid>
+                    <ListItem>
+                      <Grid container>
+                        <Grid item xs={12}>
+                          {curr.sender !== auth.user._id && (
+                            <ListItemText
+                              align="left"
+                              primary={curr.text}
+                              secondary={curr.date.substr(11, 5)}
+                            ></ListItemText>
+                          )}
+                          {curr.sender === auth.user._id && (
+                            <Fragment>
+                              <Grid container>
+                                <Grid item xs={11}>
+                                  <ListItemText
+                                    align="right"
+                                    primary={curr.text}
+                                    secondary={curr.date.substr(11, 5)}
+                                  ></ListItemText>
+                                </Grid>
+                                <Grid item xs={1}>
+                                  <DeleteIcon
+                                    // onClick={(e) =>
+                                    //   deleteMessage({
 
-                        style={{"position":"absolute","top":"10px"}}></DeleteIcon>
-                        <EditIcon style={{"position":"absolute","top":"10px","right":"25px"}}></EditIcon>
-                          </Grid>
-                        </Grid>
-                        </Fragment>
-                      )}
+                                    //   })}
 
-                    </Grid>
-                    <Grid item xs={12}>
-                      <ListItemText align="right"></ListItemText>
-                    </Grid>
+                                    style={{
+                                      position: "absolute",
+                                      top: "10px",
+                                    }}
+                                  ></DeleteIcon>
+                                  <EditIcon
+                                    style={{
+                                      position: "absolute",
+                                      top: "10px",
+                                      right: "25px",
+                                    }}
+                                  ></EditIcon>
+                                </Grid>
+                              </Grid>
+                            </Fragment>
+                          )}
+                        </Grid>
+                        <Grid item xs={12}>
+                          <ListItemText align="right"></ListItemText>
+                        </Grid>
+                      </Grid>
+                    </ListItem>
                   </Grid>
-                </ListItem>
-                </Grid>
                 </Fragment>
               ))}
           </List>
@@ -321,15 +317,13 @@ Chat.propTypes = {
   postMessage: PropTypes.func.isRequired,
   currentevents: PropTypes.object.isRequired,
   new_conver_state: PropTypes.func.isRequired,
-  
 };
 const mapStateToProps = (state) => ({
   conversation: state.auth.conversation,
   auth: state.auth,
   currentconversation: state.auth.currentconversation,
   currentevents: state.auth.currentevents,
-  singleConversation:state.auth.singleConversation,
-  
+  singleConversation: state.auth.singleConversation,
 });
 
 export default connect(mapStateToProps, {

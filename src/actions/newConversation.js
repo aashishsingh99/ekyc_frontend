@@ -3,7 +3,7 @@ import { CURRENT_CONV } from "./types";
 import { CONV_ERROR } from "./types";
 const io = require("socket.io-client");
 
-// Register User
+
 export const newConversation = ({ chatid }) => async (dispatch) => {
   const config = {
     headers: {

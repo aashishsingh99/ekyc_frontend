@@ -29,8 +29,6 @@ export const Get_One_Conversation = ({ chatRoomId }) => async (dispatch) => {
     });
     
   } catch (err) {
-    // dispatch({
-    //   type: CONV_ERROR,
-    // });
+   
   }
 };

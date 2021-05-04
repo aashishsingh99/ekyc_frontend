@@ -30,18 +30,17 @@ const initialState = {
   isAuthenticated: null,
   loading: true,
   user: null,
-  current_user:null,
+  current_user: null,
   fin: null,
   category: null,
   conversation: [],
   currentconversation: {},
   currentevents: [],
-  dict:{},
+  dict: {},
   singleConversation: [],
-  public_key:null,
-  private_key:null,
-  users:[],
-
+  public_key: null,
+  private_key: null,
+  users: [],
 };
 
 function authReducer(state = initialState, action) {
@@ -64,12 +63,11 @@ function authReducer(state = initialState, action) {
         current_user: payload,
       };
     }
-    case APPROVE:{
+    case APPROVE: {
       return {
         ...state,
-         users:payload,
-        // users:[...state.users,users[]],
-      }
+        users: payload,
+      };
     }
     case USER_LOADED2: {
       return {
@@ -84,37 +82,34 @@ function authReducer(state = initialState, action) {
         ...state,
         isAuthenticated: true,
         loading: false,
-        currentevents: [...state.currentevents,payload]
+        currentevents: [...state.currentevents, payload],
       };
-    }  
+    }
     case STATE_CONVERSATION: {
       return {
         ...state,
         isAuthenticated: true,
         loading: false,
-        currentevents: [...state.currentevents,payload]
+        currentevents: [...state.currentevents, payload],
       };
     }
-    case GET_KEYS:{
+    case GET_KEYS: {
       return {
         ...state,
-        public_key:payload[2],
-
-      }
+        public_key: payload[2],
+      };
     }
-    case GET_ALL_USERS:{
+    case GET_ALL_USERS: {
       return {
         ...state,
-        users: payload
-
-      }
+        users: payload,
+      };
     }
-    case GET_PRIVATE:{
+    case GET_PRIVATE: {
       return {
         ...state,
-        private_key:payload[1],
-
-      }
+        private_key: payload[1],
+      };
     }
     case GET_EVENTS: {
       console.log("this is current events  convo");
@@ -122,7 +117,7 @@ function authReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        currentevents:[...state.currentevents,payload],
+        currentevents: [...state.currentevents, payload],
       };
     }
     case GET_ONE_CONVERSATION: {
@@ -131,7 +126,7 @@ function authReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        singleConversation: [...state.currentevents,payload],
+        singleConversation: [...state.currentevents, payload],
       };
     }
     case CURRENT_CONV: {
@@ -151,7 +146,6 @@ function authReducer(state = initialState, action) {
       };
     }
     case CONV_STATE: {
-    
       console.log(payload);
       return {
         ...state,
@@ -187,15 +181,15 @@ function authReducer(state = initialState, action) {
         loading: false,
         user: payload,
       };
-      case LOGIN2_SUCCESS:
-        localStorage.setItem("token", payload.token);
-        return {
-          ...state,
-          ...payload,
-          isAuthenticated: true,
-          loading: false,
-          fin: payload,
-        };
+    case LOGIN2_SUCCESS:
+      localStorage.setItem("token", payload.token);
+      return {
+        ...state,
+        ...payload,
+        isAuthenticated: true,
+        loading: false,
+        fin: payload,
+      };
     case REGISTER_FAIL:
     case AUTH_ERROR:
     case LOGIN_FAIL:

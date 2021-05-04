@@ -35,14 +35,6 @@ const Landing = () => {
           <br />
           <h1 className="x-large">Hyper Tribe </h1>
           <p className="lead">Lets explore!</p>
-          {/* <Button
-            type="submit"
-            variant="contained"
-            color="secondary"
-            value="login"
-          >
-            Register
-          </Button>  */}
           <div className="buttons">
             <Link to="/register">
               <Button className={classes.home}>Sign Up </Button>

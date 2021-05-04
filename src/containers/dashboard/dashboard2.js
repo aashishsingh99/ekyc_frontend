@@ -7,17 +7,8 @@ import { connect } from "react-redux";
 import Dashboard2 from "../../components/dashboard/dashboard2";
 
 const dashboard2 = () => {
-  //   useEffect(() => {
-  //     getCurrentProfile();
-  //   }, []);
-  //console.log(category);
-  return <Dashboard2  />;
-  
+  return <Dashboard2 />;
 };
-dashboard2.propTypes = {
-  //category: PropTypes.string,
-};
-const mapStateToProps = (state) => ({
- // category: state.auth.category,
-});
+dashboard2.propTypes = {};
+const mapStateToProps = (state) => ({});
 export default connect(mapStateToProps, {})(dashboard2);

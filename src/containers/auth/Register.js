@@ -26,7 +26,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     e.preventDefault();
     name = "CAR" + name;
     console.log("updated name is ", name);
-    // if (password !== password2) setAlert("Passwords dont match", "danger");
+
     register({ name, email, password, dob, id });
     console.log("after register");
   };

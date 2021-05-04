@@ -90,55 +90,54 @@ const Dashboard2 = ({ all_users, users, Approve }) => {
                 {parseInt(user.Key.substring(3)) > 9 ? (
                   <Card className={classes.root}>
                     <Box border={1}>
+                      <CardActionArea>
+                        {/* <CardMedia className={classes.media} image={img} title={bus.bus_id} /> */}
+                        <CardContent>
+                          <Typography gutterBottom variant="h5" component="h2">
+                            {user.Key.substring(3)}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            color="textSecondary"
+                            component="p"
+                          >
+                            Email:{user.Record.make} <br />
+                            DOB:{user.Record.color} <br />
+                            {user.Record.owner === "Verified" ? (
+                              <Fragment>
+                                {" "}
+                                <div>
+                                  <h1>
+                                    Verified
+                                    <CheckCircleIcon
+                                      style={{ color: "green" }}
+                                    ></CheckCircleIcon>
+                                  </h1>
+                                </div>
+                              </Fragment>
+                            ) : (
+                              <Fragment></Fragment>
+                            )}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
 
-                    <CardActionArea>
-                      {/* <CardMedia className={classes.media} image={img} title={bus.bus_id} /> */}
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          {user.Key.substring(3)}
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          color="textSecondary"
-                          component="p"
-                        >
-                          Email:{user.Record.make} <br />
-                          DOB:{user.Record.color} <br />
-                          {user.Record.owner === "Verified" ? (
-                            <Fragment>
-                              {" "}
-                              <div>
-                                <h1>
-                                  Verified
-                                  <CheckCircleIcon
-                                    style={{ color: "green" }}
-                                  ></CheckCircleIcon>
-                                </h1>
-                              </div>
-                            </Fragment>
-                          ) : (
-                            <Fragment></Fragment>
-                          )}
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-
-                    <CardActions>
-                      <Link>
-                        {" "}
-                        <Button
-                          className={classes.ab}
-                          type="submit"
-                          variant="contained"
-                          value="login"
-                          disabled={user.Record.owner === "Verified"}
-                          onClick={(e) => onSubmit({ e, user })}
-                        >
+                      <CardActions>
+                        <Link>
                           {" "}
-                          Approve{" "}
-                        </Button>
-                      </Link>{" "}
-                    </CardActions>
+                          <Button
+                            className={classes.ab}
+                            type="submit"
+                            variant="contained"
+                            value="login"
+                            disabled={user.Record.owner === "Verified"}
+                            onClick={(e) => onSubmit({ e, user })}
+                          >
+                            {" "}
+                            Approve{" "}
+                          </Button>
+                        </Link>{" "}
+                      </CardActions>
                     </Box>
                   </Card>
                 ) : (
@@ -155,67 +154,9 @@ const Dashboard2 = ({ all_users, users, Approve }) => {
   );
 };
 
-// <Fragment>
-//     {
-//       <div className="bus_items">
-
-//         {users && users.length > 0 ? (
-
-//         users.map((user) => (
-//           <Fragment>
-
-//           <Card className={classes.root}>
-//           <CardActionArea>
-//             {/* <CardMedia className={classes.media} image={img} title={bus.bus_id} /> */}
-//             <CardContent>
-//               <Typography gutterBottom variant="h5" component="h2">
-//                 {"Sakshi"} to {"bus.to"}
-//               </Typography>
-//               <Typography variant="body2" color="textSecondary" component="p">
-//                 Start At: {"bus.start_time"}
-//                 <br />
-//                 End At:{"bus.end_time"}
-//               </Typography>
-//             </CardContent>
-//           </CardActionArea>
-
-//           <CardActions>
-//             <Link to={`/api/users/bus/${"bus._id"}`}>
-//               {" "}
-//               <Button
-//                 className={classes.ab}
-//                 type="submit"
-//                 variant="contained"
-//                 value="login"
-//               >
-//                 {" "}
-//                 View Bus{" "}
-//               </Button>
-//             </Link>{" "}
-//           </CardActions>
-//         </Card>
-//         </Fragment>
-
-//         ))
-//       )
-//        :
-//        (
-//         <h4>No users found</h4>
-//       )
-//        }
-
-//     </div>
-//     }
-//   </Fragment>
-//   //<div>Hi</div>
-//   );
-
-// };
-
 Dashboard2.propTypes = {};
 
 const mapStateToProps = (state) => ({
-  // category: state.auth.category,
   users: state.auth.users,
 });
 
