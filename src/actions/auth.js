@@ -16,7 +16,7 @@ import {
 } from "./types";
 import { setAlert } from "./alert.js";
 import setAuthToken from "../utils/setAuthToken";
-import { Notify} from "../actions/Notify";
+import { Notify } from "../actions/Notify";
 
 export const loadUser = () => async (dispatch) => {
   console.log(localStorage.token);
@@ -32,13 +32,11 @@ export const loadUser = () => async (dispatch) => {
     const res = await axios.get("/api/auth");
     console.log("in user loaded");
     if (res) console.log(res);
-    
 
     dispatch({
       type: USER_LOADED,
       payload: res.data,
     });
-    
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
@@ -66,9 +64,9 @@ export const Approve = (user) => async (dispatch) => {
 
     // console.log("in");
     const res = await axios.post("/api/auth/approve", body, config);
-    console.log("line 644444444444",res)
+    console.log("line 644444444444", res);
     // console.log("in user loaded");
-    if (res) console.log(res.data,"JKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
+    if (res) console.log(res.data, "JKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
     // dispatch({
     //   type: USER_LOADED,
     //   payload: res.data,
@@ -120,6 +118,7 @@ export const loadUser2 = () => async (dispatch) => {
 export const register = ({ name, email, password, dob, id }) => async (
   dispatch
 ) => {
+  console.log("name in action", name);
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -197,7 +196,7 @@ export const all_users = () => async (dispatch) => {
   try {
     //const res1=await axios.post("/api/users/all_users",body,config);
     const res1 = await axios.post("/api/users/all_users", config);
-    console.log("OMGGGGGGGG",res1.data);
+    console.log("OMGGGGGGGG", res1.data);
 
     console.log("inside actoion all_users");
     //console.log(res.data);

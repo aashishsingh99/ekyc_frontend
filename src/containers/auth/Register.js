@@ -11,11 +11,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     name: "",
     email: "",
     password: "",
-    dob:"",
-    id:""
-  
+    dob: "",
+    id: "",
   });
-  let { name, email, password,dob,id } = formData;
+  let { name, email, password, dob, id } = formData;
   const onChange = (e) =>
     setFormData({
       ...formData,
@@ -23,13 +22,13 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     });
   const onSubmit = (e) => {
     console.log("hi");
-    console.log("inside on submit")
+    console.log("inside on submit", name);
     e.preventDefault();
-    name="CAR"+name
-    console.log("updated name is ",name);
+    name = "CAR" + name;
+    console.log("updated name is ", name);
     // if (password !== password2) setAlert("Passwords dont match", "danger");
-  register({ name, email, password,dob,id});
-  console.log("after register")
+    register({ name, email, password, dob, id });
+    console.log("after register");
   };
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />;

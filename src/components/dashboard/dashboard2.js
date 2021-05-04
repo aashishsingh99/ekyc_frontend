@@ -37,6 +37,8 @@ import DirectionsBusIcon from "@material-ui/icons/DirectionsBus";
 import AccessAlarmsIcon from "@material-ui/icons/AccessAlarms";
 import { all_users } from "../../actions/auth";
 import { Approve } from "../../actions/auth";
+import { borders } from "@material-ui/system";
+import Box from "@material-ui/core/Box";
 
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -63,19 +65,18 @@ const Dashboard2 = ({ all_users, users, Approve }) => {
     // check for token in LS
 
     all_users();
-    
   }, []);
   const classes = useStyles();
 
-  const onSubmit = ({e,user}) => {
-   // e.preventDefault();
+  const onSubmit = ({ e, user }) => {
+    // e.preventDefault();
     console.log("inside on submit");
     console.log(user);
     console.log("calling approve");
-    
+
     Approve(user);
     all_users();
-   
+
     console.log("outside approve");
   };
   return (
@@ -88,6 +89,8 @@ const Dashboard2 = ({ all_users, users, Approve }) => {
                 {console.log(user.Key)}
                 {parseInt(user.Key.substring(3)) > 9 ? (
                   <Card className={classes.root}>
+                    <Box border={1}>
+
                     <CardActionArea>
                       {/* <CardMedia className={classes.media} image={img} title={bus.bus_id} /> */}
                       <CardContent>
@@ -104,12 +107,14 @@ const Dashboard2 = ({ all_users, users, Approve }) => {
                           {user.Record.owner === "Verified" ? (
                             <Fragment>
                               {" "}
-                              <h1>
-                                Verified
-                                <CheckCircleIcon
-                                  style={{ color: "green" }}
-                                ></CheckCircleIcon>
-                              </h1>
+                              <div>
+                                <h1>
+                                  Verified
+                                  <CheckCircleIcon
+                                    style={{ color: "green" }}
+                                  ></CheckCircleIcon>
+                                </h1>
+                              </div>
                             </Fragment>
                           ) : (
                             <Fragment></Fragment>
@@ -127,13 +132,14 @@ const Dashboard2 = ({ all_users, users, Approve }) => {
                           variant="contained"
                           value="login"
                           disabled={user.Record.owner === "Verified"}
-                          onClick={(e) => onSubmit({e,user})}
+                          onClick={(e) => onSubmit({ e, user })}
                         >
                           {" "}
                           Approve{" "}
                         </Button>
                       </Link>{" "}
                     </CardActions>
+                    </Box>
                   </Card>
                 ) : (
                   <Fragment></Fragment>
@@ -211,7 +217,6 @@ Dashboard2.propTypes = {};
 const mapStateToProps = (state) => ({
   // category: state.auth.category,
   users: state.auth.users,
-  
 });
 
 export default connect(mapStateToProps, { all_users, Approve })(Dashboard2);

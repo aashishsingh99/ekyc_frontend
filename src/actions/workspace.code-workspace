@@ -1,0 +1,14 @@
+{
+  "folders": [
+	{
+		"path": "../../../fabric-samples/fabcar/javascript/kyc/api"
+	},
+	{
+		"path": "../.."
+	},
+	{
+		"path": "../../../fabric-samples/fabcar/javascript/wallet/user1"
+	}
+],
+  "settings": {}
+}

@@ -2,11 +2,11 @@ import React, { Fragment, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { login,login2 } from "../../actions/auth";
+import { login, login2 } from "../../actions/auth";
 import Present_login from "../../components/auth/Login";
 const io = require("socket.io-client");
 // const socket = io();
-const temp="http://LocalHost:5000"
+const temp = "http://LocalHost:5000";
 const socket = io(temp, { transports: ["websocket"] });
 
 const Login = ({ login, isAuthenticated }) => {
@@ -15,7 +15,7 @@ const Login = ({ login, isAuthenticated }) => {
     password: "",
     user_type: "",
   });
-  const { email, password,user_type } = formData;
+  const { email, password, user_type } = formData;
   const onChange = (e) =>
     setFormData({
       ...formData,
@@ -23,19 +23,15 @@ const Login = ({ login, isAuthenticated }) => {
     });
   const onSubmit = async (e) => {
     e.preventDefault();
-    if(user_type=="client")
-    {
-      login({ email: email, password: password,user_type:user_type });
+    if (user_type == "client") {
+      login({ email: email, password: password, user_type: user_type });
       console.log("redirecting");
       //return <Redirect to="/dashboard" />;
-   
-    }
-    else
-    {
-      login2({ email: email, password: password,user_type:user_type });
+    } else {
+      login2({ email: email, password: password, user_type: user_type });
       return <Redirect to="/dashboard2" />;
     }
-   
+
     console.log("Success");
   };
   //redirect if logged in
